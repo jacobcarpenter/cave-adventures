@@ -1,17 +1,22 @@
 import os
+from collections import namedtuple
+import random
+
 import colored
 from colored import stylize
 import readchar
 
-adventurer_descriptions = {
-	'f': 'brave fighter',
-	'n': 'stealthy ninja',
-	't': 'sneaky thief'
+# TODO: handle Ctrl + C
+
+HeroTypeInfo = namedtuple('HeroTypeInfo', ['hp', 'str', 'dodge', 'description'])
+
+adventurer_type_infos = {
+	'f': HeroTypeInfo(hp=30, str=12, dodge=4, description='brave fighter'),
+	'n': HeroTypeInfo(hp=30, str=12, dodge=4, description='stealthy ninja'),
+	't': HeroTypeInfo(hp=30, str=12, dodge=4, description='sneaky thief'),
 }
 
 os.system("cls||clear")
-
-print()
 
 print("--------------------------------------")
 print("! ! ! " +
@@ -24,7 +29,7 @@ print("! ! ! " +
 print("--------------------------------------")
 
 print()
-adventurer = input("What is thy name, adventurer? ")
+player_name = input("What is thy name, adventurer? ")
 print("Are you a " +
 	stylize("F", colored.fg("light_magenta")) +
 	"ighter, " +
@@ -33,18 +38,33 @@ print("Are you a " +
 	stylize("T", colored.fg("light_magenta")) +
 	"hief? ", end='', flush=True)
 
-while True:
-	adventurer_type = readchar.readchar().decode('utf-8').lower()
-	if adventurer_type in adventurer_descriptions :
-		break
+adventurer_type_id = None
+while adventurer_type_id not in adventurer_type_infos:
+	adventurer_type_id = readchar.readchar().decode('utf-8').lower()
 
+adventurer_type = adventurer_type_infos[adventurer_type_id]
+player_hp = adventurer_type.hp
 
 print("\n")
-print("Welcome, " + adventurer_descriptions[adventurer_type] + " " + adventurer + "!")
+print("Welcome, " + adventurer_type.description + " " + player_name + "!")
 print("Press any key to continue.")
 
 readchar.readchar()
 
 os.system("cls||clear")
+print()
+
+enemy_hp = 8
+enemy_str = 6
+block_chance = 3
+
+print("You are in a room with an IMP!!")
+
+while enemy_hp > 0 and player_hp > 0:
+	enemy_mood = random.randint(1, 10)
+	print("He looks like he's getting ready to " + ("block" if enemy_mood <= block_chance else "attack") + "!")
+	print("Attack, Block, or Run? ")
+	readchar.readchar()
+	break
 
 print("DONE. EVERYTHING AFTER THIS IS NOT OUR PROGRAM.")

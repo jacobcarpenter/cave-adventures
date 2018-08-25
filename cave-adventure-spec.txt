@@ -1,0 +1,100 @@
+================
+ EXAMPLE SCREENS
+
+------------------------------
+
+There are 3 rooms remaining.
+
+You see a Troll. He looks like he's going to block.
+
+Attack, Block, or Run
+
+------------------------------
+------------------------------
+
+There are 4 rooms remaining.
+
+The room is empty.
+
+Advance or Exit?
+
+------------------------------
+
+
+===============
+ CLASSES
+
+Fighter: high strength; low Dodge; no magic
+Thief: high dodge; mid strength; no magic
+Magic-user: low strength; mid dodge; high magic
+
+
+Class		Str		Dodge	HP
+--------------------------------
+Fighter		12		4		30
+Ninja		9		6		26
+Thief		7		8		24
+
+
+v 1.5
+Magic-user	6		5			12*			?
+
+
+* something has to happen to trigger from attack
+
+
+
+==============
+ COMBAT
+
+Attack roll: 1d20; 20 = Crit (guaranteed hit; 1.5 * strength);
+
+Dodge: based on character stat
+
+Block roll: 0 (if attack); if block: 1d6
+
+
+Attacker rolls attack roll (1d20)
+	- if crit; guranteed hit; 1.5 * Strength is attack value
+	- if rolled value is < defender's dodge, it's a miss!
+	- otherwise; attack value = strength
+
+Defender
+	- can either block or not (based on a choice)
+		- if block, roll 1d6 which absorbs from attack value
+		- if not, take full attack value as damage
+
+
+==============
+ ENEMIES
+
+block values here represent # out 10 chance that enemy will block instead of attack
+
+
+first room enemies
+BAT/RAT: lame/easy; block=1
+
+normal enemies
+TROLL: high strength; block=2
+
+SKELETON: mid strength; good dodge; block=4
+BANDIT: mid strength; good dodge; block=5
+
+IMP: low strength; high dodge; block=3
+
+final enemy
+DRAGON (BOSS): high strength; good dodge; block=3
+
+
+Type		Str		Dodge	HP
+-------------------------------
+Bat			4		5		5
+Rat			4		3		5
+Imp			6		6		8
+Skeleton	8		5		10
+Bandit		8		4		12
+Troll		12		2		16
+Dragon		10		4		24
+
+
+
